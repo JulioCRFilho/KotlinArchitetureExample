@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "81120720406",
+    "firebase_url": "https://udstest-a65a6.firebaseio.com",
+    "project_id": "udstest-a65a6",
+    "storage_bucket": "udstest-a65a6.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:81120720406:android:5e5e1753d80126e0b6a737",
+        "android_client_info": {
+          "package_name": "com.example.uds"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "81120720406-krcf6n1dvg695v1t1qjj9419tb5q7hua.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBSfJLI-DB6I8gWjOJuOW8NO-f5wOvKT6Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "81120720406-krcf6n1dvg695v1t1qjj9419tb5q7hua.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
