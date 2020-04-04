@@ -25,6 +25,7 @@
             android:ems="10"
             android:hint="name@mail.com"
             android:text="@={viewModel.email}"
+            android:textColor="?android:attr/textColorPrimary"
             android:inputType="textEmailAddress"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -40,6 +41,7 @@
             android:ems="10"
             android:hint="******"
             android:text="@={viewModel.password}"
+            android:textColor="?android:attr/textColorPrimary"
             android:inputType="textPassword"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -54,8 +56,23 @@
             android:layout_marginEnd="171dp"
             android:onClick="@{viewModel::onLoginButtonClick}"
             android:text="Login"
+            android:textColor="?android:attr/textColorPrimary"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/editText2" />
+
+        <Button
+            android:id="@+id/button2"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="51dp"
+            android:textSize="18dp"
+            android:text="Cadastre-se"
+            android:onClick="@{viewModel::signInNewUser}"
+            android:textColor="?android:attr/textColorPrimary"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

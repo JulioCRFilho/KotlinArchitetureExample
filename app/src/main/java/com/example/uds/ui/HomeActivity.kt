@@ -3,6 +3,7 @@ package com.example.uds.ui
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.uds.R
+import com.example.uds.utils.CustomDialog
 import kotlinx.android.synthetic.main.activity_home.*
 
 class HomeActivity : AppCompatActivity() {
@@ -13,5 +14,6 @@ class HomeActivity : AppCompatActivity() {
 
         toolbar.title = "Início"
         setSupportActionBar(toolbar)
+
     }
 }

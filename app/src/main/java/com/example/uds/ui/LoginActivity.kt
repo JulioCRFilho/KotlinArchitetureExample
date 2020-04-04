@@ -3,12 +3,12 @@ package com.example.uds.ui
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import com.example.uds.R
 import com.example.uds.api.AuthInterface
 import com.example.uds.databinding.ActivityLoginBinding
+import com.example.uds.utils.CustomDialog
 import com.example.uds.viewModel.LoginViewModel
 
 class LoginActivity : AppCompatActivity(), AuthInterface {
@@ -25,6 +25,7 @@ class LoginActivity : AppCompatActivity(), AuthInterface {
     }
 
     private fun verifyUser() {
+        CustomDialog(this, viewModel.authLiveData, this)
         val user = viewModel.verifyUserLoggedIn()
         user?.let {
             val intent = Intent(this, HomeActivity::class.java)
@@ -34,16 +35,17 @@ class LoginActivity : AppCompatActivity(), AuthInterface {
     }
 
     override fun onStarted() {
-        Toast.makeText(this, "logando", Toast.LENGTH_LONG).show()
+        CustomDialog(this, viewModel.authLiveData, this).show()
     }
 
     override fun onSuccess() {
+        viewModel.authLiveData.value = Pair(1, null)
         val intent = Intent(this, HomeActivity::class.java)
         startActivity(intent)
         finish()
     }
 
-    override fun onFailure(message: String) {
-        Toast.makeText(this, message, Toast.LENGTH_LONG).show()
+    override fun onFailure(message: String?) {
+        viewModel.authLiveData.value = Pair(2, message)
     }
 }
