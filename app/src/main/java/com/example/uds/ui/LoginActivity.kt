@@ -23,7 +23,7 @@ class LoginActivity : AppCompatActivity(), AuthInterface {
         binding.viewUI = this
         viewModel.authInterface = this
 
-//        verifyUser()
+        verifyUser()
     }
 
     private fun verifyUser() {
