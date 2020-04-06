@@ -7,14 +7,14 @@
     <group>
         <item
             android:id="@+id/nav_profile"
-            android:icon="@drawable/ic_success"
-            android:title="Perfil"
+            android:icon="@drawable/profile_ic"
+            android:title="@string/profile"
             />
 
         <item
             android:id="@+id/nav_logout"
-            android:icon="@drawable/ic_success"
-            android:title="Sair"
+            android:icon="@drawable/logout_ic"
+            android:title="@string/logout"
             />
     </group>
 

@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".ui.ProfileActivity"
+            android:parentActivityName=".ui.HomeActivity" android:noHistory="true" />
+        <activity
             android:name=".ui.SignupActivity"
             android:parentActivityName=".ui.LoginActivity" />
         <activity android:name=".ui.HomeActivity" />
@@ -20,7 +23,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".utils.BaseActivity" />
+        <activity android:name=".utils.BaseActivity" android:noHistory="true" />
     </application>
 
 </manifest>

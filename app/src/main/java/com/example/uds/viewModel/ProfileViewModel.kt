@@ -1,13 +1,11 @@
 package com.example.uds.viewModel
 
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.google.firebase.auth.FirebaseAuth
 
-class HomeViewModel : ViewModel() {
+class ProfileViewModel : ViewModel() {
     private val firebaseAuth = FirebaseAuth.getInstance()
     private val user = firebaseAuth.currentUser
-    val userName: String = user?.displayName ?: ""
-
-    val currentTabLiveData = MutableLiveData(0)
+    val userName: String? = user?.displayName
+    val userEmail: String? = user?.email
 }

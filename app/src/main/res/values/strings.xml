@@ -2,4 +2,10 @@
     <string name="app_name">UDS</string>
     <string name="signup">Cadastre-se</string>
     <string name="home">Início</string>
+    <string name="welcome">Bem vindo</string>
+    <string name="profile">Perfil</string>
+    <string name="logout">Sair</string>
+    <string name="editing_info">As informações não preenchidas não serão editadas</string>
+    <string name="title">Título:</string>
+    <string name="intro">Intro:</string>
 </resources>
