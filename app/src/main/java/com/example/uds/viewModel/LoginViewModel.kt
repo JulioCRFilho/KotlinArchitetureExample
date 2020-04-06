@@ -1,9 +1,13 @@
 package com.example.uds.viewModel
 
+import android.content.Intent
 import android.view.View
+import androidx.core.content.ContextCompat.startActivity
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.uds.api.AuthInterface
+import com.example.uds.ui.LoginActivity
+import com.example.uds.ui.SignupActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 
@@ -38,9 +42,5 @@ class LoginViewModel : ViewModel() {
 
     fun verifyUserLoggedIn(): FirebaseUser? {
         return firebaseAuth.currentUser
-    }
-
-    fun signInNewUser(view: View) {
-
     }
 }

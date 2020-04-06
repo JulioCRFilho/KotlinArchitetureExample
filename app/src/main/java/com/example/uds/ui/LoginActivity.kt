@@ -3,6 +3,7 @@ package com.example.uds.ui
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import com.example.uds.R
@@ -12,16 +13,17 @@ import com.example.uds.utils.CustomDialog
 import com.example.uds.viewModel.LoginViewModel
 
 class LoginActivity : AppCompatActivity(), AuthInterface {
-    private lateinit var viewModel: LoginViewModel;
+    private lateinit var viewModel: LoginViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val binding: ActivityLoginBinding = DataBindingUtil.setContentView(this, R.layout.activity_login)
         viewModel = ViewModelProvider(this).get(LoginViewModel::class.java)
         binding.viewModel = viewModel
+        binding.viewUI = this
         viewModel.authInterface = this
 
-        verifyUser()
+//        verifyUser()
     }
 
     private fun verifyUser() {
@@ -47,5 +49,10 @@ class LoginActivity : AppCompatActivity(), AuthInterface {
 
     override fun onFailure(message: String?) {
         viewModel.authLiveData.value = Pair(2, message)
+    }
+
+    fun signupNewUser(view: View) {
+        val intent = Intent(this, SignupActivity::class.java)
+        startActivity(intent)
     }
 }

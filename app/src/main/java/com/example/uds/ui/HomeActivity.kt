@@ -2,18 +2,23 @@ package com.example.uds.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.databinding.DataBindingUtil
+import androidx.databinding.ViewDataBinding
+import androidx.lifecycle.ViewModelProvider
 import com.example.uds.R
-import com.example.uds.utils.CustomDialog
-import kotlinx.android.synthetic.main.activity_home.*
+import com.example.uds.databinding.ActivityHomeBinding
+import com.example.uds.utils.setToolbar
+import com.example.uds.viewModel.HomeViewModel
+import kotlinx.android.synthetic.main.include_toolbar.*
 
 class HomeActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_home)
+        val binding: ActivityHomeBinding = DataBindingUtil.setContentView(this, R.layout.activity_home)
+        val viewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
+        binding.viewModel = viewModel
 
-        toolbar.title = "Início"
-        setSupportActionBar(toolbar)
-
+        setToolbar(toolbar, getString(R.string.home), false)
     }
 }

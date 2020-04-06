@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">UDS</string>
+    <string name="signup">Cadastre-se</string>
+    <string name="home">Início</string>
 </resources>
