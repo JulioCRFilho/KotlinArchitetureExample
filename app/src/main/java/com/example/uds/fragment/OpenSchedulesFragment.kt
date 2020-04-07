@@ -6,7 +6,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.uds.R
+import com.example.uds.adapter.OpenSchedulesAdapter
 import com.example.uds.api.AuthInterface
 import com.example.uds.utils.CustomDialog
 import com.example.uds.viewModel.HomeViewModel
@@ -29,9 +33,12 @@ class OpenSchedulesFragment(private val vm: HomeViewModel) :
         viewModel = vm
         viewModel.authInterface = this
 
-        registerBtn.setOnClickListener {
-            viewModel.writeToDB()
-        }
+        viewModel.openSchedulesLiveData.observe(viewLifecycleOwner, Observer {
+            with(openRecyclerView) {
+                adapter = OpenSchedulesAdapter(it)
+                layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
+            }
+        })
     }
 
     override fun onStarted() {

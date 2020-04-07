@@ -9,6 +9,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import com.example.uds.R
 import kotlinx.android.synthetic.main.fragment_dialog.*
+import java.util.*
+import kotlin.concurrent.timer
 
 class CustomDialog(context: Context, private val liveData: LiveData<Pair<Int?, String?>>, private val owner: LifecycleOwner) : Dialog(context) {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -23,7 +25,10 @@ class CustomDialog(context: Context, private val liveData: LiveData<Pair<Int?, S
 
             if (!it.second.isNullOrEmpty()) failMsg.text = it.second
 
-            if(it.first == 1) this.dismiss()
+            if(it.first == 1) {
+                Thread.sleep(500)
+                this.dismiss()
+            }
         })
     }
 }

@@ -1,14 +1,12 @@
 package com.example.uds.viewModel
 
 import android.util.Log.d
-import android.util.Log.i
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.uds.api.AuthInterface
 import com.example.uds.model.Schedule
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.*
 
 class HomeViewModel : ViewModel() {
     private val firebaseAuth = FirebaseAuth.getInstance()
@@ -16,31 +14,65 @@ class HomeViewModel : ViewModel() {
     val userName: String = user?.displayName ?: ""
 
     private val firebaseDataBase = FirebaseDatabase.getInstance()
-    private val dbRef = firebaseDataBase.reference
+    private val dbRef = firebaseDataBase.getReference("schedules")
 
     var authInterface: AuthInterface? = null
     val dbStatusLiveData = MutableLiveData<Pair<Int?, String?>>()
 
-    private val teste = Schedule(
-        "teste1", "só testando", "começando o cadastro das pautas"
-    )
+    val openSchedulesLiveData: MutableLiveData<ArrayList<Schedule>> = MutableLiveData()
+    val doneSchedulesLiveData: MutableLiveData<ArrayList<Schedule>> = MutableLiveData()
 
-    fun writeToDB() {
-        d("tatata", "COMECOU")
-        dbStatusLiveData.value = Pair(0, null)
-        authInterface?.onStarted()
+    init {
+        getData()
+    }
 
-        dbRef.child("users").setValue(user?.uid!!).addOnCompleteListener {
-            if (it.isSuccessful) {
+    private fun getData() {
+        dbRef.addValueEventListener(object : ValueEventListener {
+            override fun onCancelled(p0: DatabaseError) {
+                authInterface?.onStarted()
+                authInterface?.onFailure(p0.message)
+            }
 
+            override fun onDataChange(p0: DataSnapshot) {
+                val list = p0.children.first().children.map { data ->
+                    data.getValue(Schedule::class.java)
+                }
+
+                organizeItems(list)
+            }
+        })
+    }
+
+    fun organizeItems(items: List<Schedule?>) {
+        val openSchedules: ArrayList<Schedule> = ArrayList()
+        val doneSchedules: ArrayList<Schedule> = ArrayList()
+
+        items.forEach { item ->
+            if (item?.isDone!!) {
+                doneSchedules.add(item)
+            } else {
+                openSchedules.add(item)
             }
         }
 
-        dbRef.child("users").child(user?.uid ?: "").child("schedules").setValue(teste).addOnCompleteListener { auth ->
-            if (auth.isSuccessful) {
+        openSchedulesLiveData.value = openSchedules
+        doneSchedulesLiveData.value = doneSchedules
+    }
+
+    fun writeToDB() {
+        dbStatusLiveData.value = Pair(0, null)
+        authInterface?.onStarted()
+
+        val id = dbRef.push().key
+        val teste = Schedule(
+            id, "teste1", "só testando", "começando o cadastro das pautas"
+        )
+
+        dbRef.child(user?.uid!!).child(id!!).setValue(teste).addOnCompleteListener {
+            if (it.isSuccessful) {
                 authInterface?.onSuccess()
             } else {
-                authInterface?.onFailure(auth.exception?.message)
+                authInterface?.onFailure(it.exception?.message)
             }
         }
     }
