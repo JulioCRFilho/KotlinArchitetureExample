@@ -5,8 +5,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.uds.R
+import com.example.uds.adapter.SchedulesAdapter
 import com.example.uds.viewModel.HomeViewModel
+import kotlinx.android.synthetic.main.fragment_done_schedules.*
+import kotlinx.android.synthetic.main.fragment_done_schedules.viewFlipper
 
 class DoneSchedulesFragment(private val vm: HomeViewModel) :
     Fragment() {
@@ -23,5 +29,20 @@ class DoneSchedulesFragment(private val vm: HomeViewModel) :
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel = vm
+
+        viewModel.dbStatusLiveData.observe(viewLifecycleOwner, Observer {
+            viewFlipper.displayedChild = it.first ?: 0
+        })
+
+        viewModel.doneSchedulesLiveData.observe(viewLifecycleOwner, Observer {
+            if (it.count() > 0) {
+                with(doneRecyclerView) {
+                    layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
+                    adapter = SchedulesAdapter(it)
+                }
+            } else {
+                emptyList.visibility = View.VISIBLE
+            }
+        })
     }
 }

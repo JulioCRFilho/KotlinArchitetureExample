@@ -10,14 +10,12 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.uds.R
-import com.example.uds.adapter.OpenSchedulesAdapter
-import com.example.uds.api.AuthInterface
-import com.example.uds.utils.CustomDialog
+import com.example.uds.adapter.SchedulesAdapter
 import com.example.uds.viewModel.HomeViewModel
 import kotlinx.android.synthetic.main.fragment_open_schedules.*
 
 class OpenSchedulesFragment(private val vm: HomeViewModel) :
-    Fragment(), AuthInterface {
+    Fragment() {
     lateinit var viewModel: HomeViewModel
 
     override fun onCreateView(
@@ -31,26 +29,20 @@ class OpenSchedulesFragment(private val vm: HomeViewModel) :
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel = vm
-        viewModel.authInterface = this
+
+        viewModel.dbStatusLiveData.observe(viewLifecycleOwner, Observer {
+            viewFlipper.displayedChild = it.first ?: 0
+        })
 
         viewModel.openSchedulesLiveData.observe(viewLifecycleOwner, Observer {
-            with(openRecyclerView) {
-                adapter = OpenSchedulesAdapter(it)
-                layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
+            if(it.count() > 0) {
+                with(openRecyclerView) {
+                    layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
+                    adapter = SchedulesAdapter(it)
+                }
+            } else {
+                emptyList.visibility = View.VISIBLE
             }
         })
-    }
-
-    override fun onStarted() {
-        CustomDialog(context!!, viewModel.dbStatusLiveData, this).show()
-    }
-
-    override fun onSuccess() {
-        viewModel.dbStatusLiveData.value = Pair(1, null)
-    }
-
-    override fun onFailure(message: String?) {
-        viewModel.dbStatusLiveData.value = Pair(2, message)
-
     }
 }

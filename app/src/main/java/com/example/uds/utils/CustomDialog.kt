@@ -26,7 +26,6 @@ class CustomDialog(context: Context, private val liveData: LiveData<Pair<Int?, S
             if (!it.second.isNullOrEmpty()) failMsg.text = it.second
 
             if(it.first == 1) {
-                Thread.sleep(500)
                 this.dismiss()
             }
         })

@@ -8,4 +8,8 @@
     <string name="editing_info">As informações não preenchidas não serão editadas</string>
     <string name="title">Título:</string>
     <string name="intro">Intro:</string>
+    <string name="no_open_tasks">Você não possui pautas abertas</string>
+    <string name="request_failed">Falha na comunicação com o servidor</string>
+    <string name="no_done_tasks">Você não possui pautas fechadas</string>
+    <string name="loading">Carregando...</string>
 </resources>

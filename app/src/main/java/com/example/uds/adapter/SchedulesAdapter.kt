@@ -9,7 +9,7 @@ import com.example.uds.R
 import com.example.uds.model.Schedule
 import kotlinx.android.synthetic.main.adapter_schedule.view.*
 
-class OpenSchedulesAdapter(private val schedulesList: List<Schedule>): RecyclerView.Adapter<OpenSchedulesAdapter.ViewHolder>() {
+class SchedulesAdapter(private val schedulesList: List<Schedule>): RecyclerView.Adapter<SchedulesAdapter.ViewHolder>() {
     override fun getItemCount(): Int = schedulesList.count()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {

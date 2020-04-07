@@ -1,6 +1,5 @@
 package com.example.uds.viewModel
 
-import android.util.Log.d
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.uds.api.AuthInterface
@@ -27,10 +26,11 @@ class HomeViewModel : ViewModel() {
     }
 
     private fun getData() {
+        dbStatusLiveData.value = Pair(0, null)
+
         dbRef.addValueEventListener(object : ValueEventListener {
             override fun onCancelled(p0: DatabaseError) {
-                authInterface?.onStarted()
-                authInterface?.onFailure(p0.message)
+                dbStatusLiveData.value = Pair(2, p0.message)
             }
 
             override fun onDataChange(p0: DataSnapshot) {
@@ -54,6 +54,7 @@ class HomeViewModel : ViewModel() {
                 openSchedules.add(item)
             }
         }
+        dbStatusLiveData.value = Pair(1, null)
 
         openSchedulesLiveData.value = openSchedules
         doneSchedulesLiveData.value = doneSchedules

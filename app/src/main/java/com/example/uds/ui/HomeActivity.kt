@@ -1,12 +1,17 @@
 package com.example.uds.ui
 
 import android.os.Bundle
+import android.util.Log.d
+import android.widget.Toast
+import androidx.core.view.get
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import com.example.uds.R
 import com.example.uds.adapter.TabsAdapter
+import com.example.uds.api.AuthInterface
 import com.example.uds.databinding.ActivityHomeBinding
 import com.example.uds.utils.BaseActivity
+import com.example.uds.utils.CustomDialog
 import com.example.uds.viewModel.HomeViewModel
 import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.include_toolbar.toolbar

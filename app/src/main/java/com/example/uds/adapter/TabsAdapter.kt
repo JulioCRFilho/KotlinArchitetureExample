@@ -17,6 +17,13 @@ class TabsAdapter(fm: FragmentManager, private val vm: HomeViewModel) : Fragment
         }
     }
 
+    override fun getPageTitle(position: Int): CharSequence? {
+        return when (position) {
+            0 -> "Abertas"
+            else -> "Finalizadas"
+        }
+    }
+
     override fun getCount(): Int = 2
 
 }
