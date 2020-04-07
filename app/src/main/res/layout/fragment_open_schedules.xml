@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.example.uds.viewModel.HomeViewModel" />
+    </data>
+
+<LinearLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
@@ -10,20 +18,29 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:text="testetee"
-        android:textColor="#fff" />
+        android:textColor="?android:attr/textColorPrimary" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
         android:text="testetee"
-        android:textColor="#fff" />
+        android:textColor="?android:attr/textColorPrimary" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
         android:text="testetee"
-        android:textColor="?android:attr/colorPrimary" />
+        android:textColor="?android:attr/textColorPrimary" />
 
+    <com.google.android.material.button.MaterialButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:textColor="?android:attr/textColorPrimary"
+        android:text="CADASTRA VEI"
+        android:onClick="@{viewModel::writeToDB}"
+/>
 </LinearLayout>
+</layout>
