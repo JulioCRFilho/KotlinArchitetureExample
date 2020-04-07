@@ -19,6 +19,8 @@ class CustomDialog(context: Context, private val liveData: LiveData<Pair<Int?, S
         liveData.observe(owner, Observer {
             viewFlipper.displayedChild = it.first ?: 0
 
+            this.setCancelable(it.first != 0)
+
             if (!it.second.isNullOrEmpty()) failMsg.text = it.second
 
             if(it.first == 1) this.dismiss()

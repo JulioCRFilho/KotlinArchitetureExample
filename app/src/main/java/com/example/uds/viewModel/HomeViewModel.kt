@@ -1,6 +1,7 @@
 package com.example.uds.viewModel
 
 import android.util.Log.d
+import android.util.Log.i
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.uds.api.AuthInterface
@@ -15,7 +16,7 @@ class HomeViewModel : ViewModel() {
     val userName: String = user?.displayName ?: ""
 
     private val firebaseDataBase = FirebaseDatabase.getInstance()
-    private val dbRef = firebaseDataBase.getReference("Schedule")
+    private val dbRef = firebaseDataBase.reference
 
     var authInterface: AuthInterface? = null
     val dbStatusLiveData = MutableLiveData<Pair<Int?, String?>>()
@@ -29,12 +30,18 @@ class HomeViewModel : ViewModel() {
         dbStatusLiveData.value = Pair(0, null)
         authInterface?.onStarted()
 
-        dbRef.setValue(teste, (DatabaseReference.CompletionListener { databaseError, _ ->
-            if (databaseError != null) {
-                authInterface?.onFailure(databaseError.message)
-            } else {
-                authInterface?.onSuccess()
+        dbRef.child("users").setValue(user?.uid!!).addOnCompleteListener {
+            if (it.isSuccessful) {
+
             }
-        }))
+        }
+
+        dbRef.child("users").child(user?.uid ?: "").child("schedules").setValue(teste).addOnCompleteListener { auth ->
+            if (auth.isSuccessful) {
+                authInterface?.onSuccess()
+            } else {
+                authInterface?.onFailure(auth.exception?.message)
+            }
+        }
     }
 }
