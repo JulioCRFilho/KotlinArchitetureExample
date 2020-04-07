@@ -9,14 +9,14 @@ import com.example.uds.fragment.OpenSchedulesFragment
 import com.example.uds.viewModel.HomeViewModel
 import com.google.android.material.appbar.AppBarLayout
 
-class TabsAdapter(fm: FragmentManager, private val vm: HomeViewModel, private val activity: Activity) : FragmentPagerAdapter(fm) {
+class TabsAdapter(fm: FragmentManager, private val vm: HomeViewModel) : FragmentPagerAdapter(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
     override fun getItem(position: Int): Fragment {
         return when (position) {
-            0 -> OpenSchedulesFragment(vm, activity)
-            else -> DoneSchedulesFragment(vm, activity)
+            0 -> OpenSchedulesFragment(vm)
+            else -> DoneSchedulesFragment(vm)
         }
     }
 
-    override fun getCount(): Int = 1
+    override fun getCount(): Int = 2
 
 }

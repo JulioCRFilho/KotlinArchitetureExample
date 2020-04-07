@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="230dp"
     android:layout_height="wrap_content"
     android:layout_gravity="center"
@@ -12,42 +11,45 @@
         android:id="@+id/viewFlipper"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        >
+        android:layout_gravity="center_horizontal">
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:orientation="vertical">
 
             <ProgressBar
                 android:layout_width="80dp"
                 android:layout_height="80dp"
+                android:layout_gravity="center_horizontal"
                 android:layout_marginTop="20dp"
-                android:tint="?android:attr/textColorPrimary"
-                android:progressTint="?android:attr/textColorPrimary" />
+                android:progressTint="?android:attr/textColorPrimary"
+                android:tint="?android:attr/textColorPrimary" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
                 android:layout_marginTop="16dp"
                 android:layout_marginBottom="20dp"
                 android:text="Carregando..."
-                android:gravity="center_horizontal"
                 android:textColor="?android:attr/textColorPrimary"
                 android:textSize="20dp"
                 android:textStyle="bold" />
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:orientation="vertical">
 
             <ImageView
                 android:layout_width="80dp"
                 android:layout_height="80dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginHorizontal="16dp"
                 android:layout_marginTop="20dp"
                 android:tint="?android:attr/textColorPrimary"
                 app:srcCompat="@drawable/ic_success" />
@@ -55,24 +57,26 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginHorizontal="16dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginBottom="20dp"
                 android:text="Sucesso!"
-                android:gravity="center_horizontal"
                 android:textColor="?android:attr/textColorPrimary"
                 android:textSize="20dp"
                 android:textStyle="bold" />
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
             android:orientation="vertical">
 
             <ImageView
                 android:layout_width="80dp"
                 android:layout_height="80dp"
+                android:layout_gravity="center_horizontal"
                 android:layout_marginTop="20dp"
                 android:tint="?android:attr/textColorPrimary"
                 app:srcCompat="@android:drawable/ic_dialog_alert" />
@@ -81,10 +85,10 @@
                 android:id="@+id/failMsg"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginHorizontal="20dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginBottom="20dp"
-                android:layout_marginHorizontal="16dp"
-                android:gravity="center_horizontal"
                 android:text="Ops, falha na conexão"
                 android:textColor="?android:attr/textColorPrimary"
                 android:textSize="20dp"

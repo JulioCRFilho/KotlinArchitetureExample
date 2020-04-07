@@ -1,19 +1,18 @@
 package com.example.uds.fragment
 
-import android.app.Activity
 import android.os.Bundle
+import android.util.Log.d
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.example.uds.R
 import com.example.uds.api.AuthInterface
-import com.example.uds.databinding.FragmentOpenSchedulesBinding
 import com.example.uds.utils.CustomDialog
 import com.example.uds.viewModel.HomeViewModel
+import kotlinx.android.synthetic.main.fragment_open_schedules.*
 
-class OpenSchedulesFragment(private val vm: HomeViewModel, private val activity: Activity) :
+class OpenSchedulesFragment(private val vm: HomeViewModel) :
     Fragment(), AuthInterface {
     lateinit var viewModel: HomeViewModel
 
@@ -27,15 +26,16 @@ class OpenSchedulesFragment(private val vm: HomeViewModel, private val activity:
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val binding: FragmentOpenSchedulesBinding =
-            DataBindingUtil.setContentView(activity, R.layout.fragment_open_schedules)
         viewModel = vm
-        binding.viewModel = viewModel
         viewModel.authInterface = this
+
+        registerBtn.setOnClickListener {
+            viewModel.writeToDB()
+        }
     }
 
     override fun onStarted() {
-        CustomDialog(activity, viewModel.dbStatusLiveData, this).show()
+        CustomDialog(context!!, viewModel.dbStatusLiveData, this).show()
     }
 
     override fun onSuccess() {
@@ -44,5 +44,6 @@ class OpenSchedulesFragment(private val vm: HomeViewModel, private val activity:
 
     override fun onFailure(message: String?) {
         viewModel.dbStatusLiveData.value = Pair(2, message)
+
     }
 }

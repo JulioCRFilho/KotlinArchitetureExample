@@ -22,8 +22,7 @@ class HomeActivity : BaseActivity() {
         setToolbar(toolbar, getString(R.string.home), false, viewModel.userName)
 
         binding.viewModel = viewModel
-        viewPager.adapter = TabsAdapter(supportFragmentManager, viewModel, this)
-        viewPager.currentItem = 0
+        viewPager.adapter = TabsAdapter(supportFragmentManager, viewModel)
         tabLayout.setupWithViewPager(viewPager)
     }
 }
