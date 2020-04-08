@@ -12,4 +12,5 @@
     <string name="request_failed">Falha na comunicação com o servidor</string>
     <string name="no_done_tasks">Você não possui pautas fechadas</string>
     <string name="loading">Carregando...</string>
+    <string name="description">Descrição:</string>
 </resources>

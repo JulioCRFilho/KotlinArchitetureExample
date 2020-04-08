@@ -12,7 +12,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.uds.R
 import com.example.uds.adapter.SchedulesAdapter
 import com.example.uds.viewModel.HomeViewModel
+import kotlinx.android.synthetic.main.fragment_done_schedules.*
 import kotlinx.android.synthetic.main.fragment_open_schedules.*
+import kotlinx.android.synthetic.main.fragment_open_schedules.emptyList
+import kotlinx.android.synthetic.main.fragment_open_schedules.viewFlipper
 
 class OpenSchedulesFragment(private val vm: HomeViewModel) :
     Fragment() {
@@ -35,10 +38,14 @@ class OpenSchedulesFragment(private val vm: HomeViewModel) :
         })
 
         viewModel.openSchedulesLiveData.observe(viewLifecycleOwner, Observer {
-            if(it.count() > 0) {
+            if (it.count() > 0) {
+                emptyList.visibility = View.GONE
+
                 with(openRecyclerView) {
                     layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
-                    adapter = SchedulesAdapter(it)
+                    adapter = SchedulesAdapter(it) { id, value ->
+                        viewModel.updateSchedule(id, value)
+                    }
                 }
             } else {
                 emptyList.visibility = View.VISIBLE

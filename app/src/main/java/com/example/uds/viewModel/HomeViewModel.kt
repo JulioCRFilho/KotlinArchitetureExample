@@ -1,5 +1,6 @@
 package com.example.uds.viewModel
 
+import android.view.View
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.uds.api.AuthInterface
@@ -28,13 +29,13 @@ class HomeViewModel : ViewModel() {
     private fun getData() {
         dbStatusLiveData.value = Pair(0, null)
 
-        dbRef.addValueEventListener(object : ValueEventListener {
+        dbRef.child(user?.uid!!).addValueEventListener(object : ValueEventListener {
             override fun onCancelled(p0: DatabaseError) {
                 dbStatusLiveData.value = Pair(2, p0.message)
             }
 
             override fun onDataChange(p0: DataSnapshot) {
-                val list = p0.children.first().children.map { data ->
+                val list = p0.children.map { data ->
                     data.getValue(Schedule::class.java)
                 }
 
@@ -60,21 +61,25 @@ class HomeViewModel : ViewModel() {
         doneSchedulesLiveData.value = doneSchedules
     }
 
-    fun writeToDB() {
+    fun updateSchedule(id: String, value: Boolean) {
         dbStatusLiveData.value = Pair(0, null)
         authInterface?.onStarted()
 
-        val id = dbRef.push().key
-        val teste = Schedule(
-            id, "teste1", "só testando", "começando o cadastro das pautas"
-        )
-
-        dbRef.child(user?.uid!!).child(id!!).setValue(teste).addOnCompleteListener {
+        dbRef.child(user?.uid!!).child(id).child("done").setValue(!value).addOnCompleteListener {
             if (it.isSuccessful) {
                 authInterface?.onSuccess()
             } else {
                 authInterface?.onFailure(it.exception?.message)
             }
         }
+    }
+
+    fun writeToDB(title: String, intro: String, desc: String) {
+        val id = dbRef.push().key
+        val schedule = Schedule(
+            id, title, intro, desc
+        )
+
+        dbRef.child(user?.uid!!).child(id!!).setValue(schedule)
     }
 }

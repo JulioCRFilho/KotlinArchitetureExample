@@ -36,9 +36,13 @@ class DoneSchedulesFragment(private val vm: HomeViewModel) :
 
         viewModel.doneSchedulesLiveData.observe(viewLifecycleOwner, Observer {
             if (it.count() > 0) {
+                emptyList.visibility = View.GONE
+
                 with(doneRecyclerView) {
                     layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
-                    adapter = SchedulesAdapter(it)
+                    adapter = SchedulesAdapter(it) { id, value ->
+                        viewModel.updateSchedule(id, value)
+                    }
                 }
             } else {
                 emptyList.visibility = View.VISIBLE

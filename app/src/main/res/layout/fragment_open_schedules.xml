@@ -11,7 +11,7 @@
         android:id="@+id/emptyList"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/no_done_tasks"
+        android:text="@string/no_open_tasks"
         android:layout_marginTop="20dp"
         android:gravity="center_horizontal"
         android:textStyle="bold"
