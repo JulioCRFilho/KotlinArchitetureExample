@@ -26,7 +26,7 @@ class HomeActivity : BaseActivity() {
         tabLayout.setTabTextColors(getColor(R.color.colorPrimary), getColor(R.color.colorPrimary))
 
         floatBtn.setOnClickListener {
-            NewScheduleDialog(this, viewModel, this).show()
+            NewScheduleDialog(this, viewModel).show()
         }
     }
 }
