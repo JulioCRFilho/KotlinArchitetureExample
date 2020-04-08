@@ -4,7 +4,7 @@ import android.app.Dialog
 import android.content.Context
 import android.os.Bundle
 import android.widget.Toast
-import com.example.ud
+import com.example.uds.R
 import com.example.uds.viewModel.HomeViewModel
 import com.google.android.material.textfield.TextInputEditText
 import kotlinx.android.synthetic.main.fragment_new_schedule.*
